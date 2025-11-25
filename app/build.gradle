@@ -1,0 +1,33 @@
+plugins { 
+    id 'com.android.application'
+}
+
+android {
+    namespace 'com.example.campuslink'
+    compileSdk 34
+    defaultConfig {
+        applicationId 'com.example.campuslink'
+        minSdk 26
+        versionCode 1
+        versionName '0.1'
+    }
+    buildTypes { release { minifyEnabled false } }
+}
+
+dependencies {
+    implementation platform(libs.firebase.bom)
+    implementation libs.androidx.appcompat
+    implementation libs.material
+    implementation libs.androidx.constraintlayout
+    implementation libs.androidx.lifecycle.viewmodel
+    implementation libs.androidx.lifecycle.livedata
+    implementation libs.androidx.room.runtime
+    annotationProcessor libs.androidx.room.compiler
+    implementation libs.firebase.auth
+    implementation libs.firebase.firestore
+    implementation libs.retrofit
+    implementation libs.okhttp
+}
+
+// Apply the Google services plugin at the end of the file
+apply plugin: 'com.google.gms.google-services'
