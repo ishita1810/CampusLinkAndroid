@@ -1,17 +1,15 @@
 package com.example.campuslink.ui.attendance;
 
 import android.os.Bundle;
-import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.campuslink.R;
 import com.example.campuslink.data.local.AttendanceRecord;
 import com.example.campuslink.data.local.CampusDatabase;
 import com.example.campuslink.data.local.Student;
+import com.example.campuslink.databinding.ActivityAttendanceBinding;
 import com.example.campuslink.ui.adapter.StudentAdapter;
 
 import java.text.SimpleDateFormat;
@@ -25,6 +23,7 @@ import java.util.concurrent.Executors;
 
 public class AttendanceActivity extends AppCompatActivity implements StudentAdapter.OnStudentAttendanceChangedListener {
 
+    private ActivityAttendanceBinding binding;
     private StudentAdapter adapter;
     private CampusDatabase db;
     private final ExecutorService executorService = Executors.newSingleThreadExecutor();
@@ -33,25 +32,26 @@ public class AttendanceActivity extends AppCompatActivity implements StudentAdap
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_attendance);
+        binding = ActivityAttendanceBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
-        RecyclerView rvStudents = findViewById(R.id.rvStudents);
-        rvStudents.setLayoutManager(new LinearLayoutManager(this));
+        setSupportActionBar(binding.toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        Button btnSaveAttendance = findViewById(R.id.btnSaveAttendance);
-        btnSaveAttendance.setOnClickListener(v -> saveAttendance());
+        binding.rvStudents.setLayoutManager(new LinearLayoutManager(this));
+        binding.btnSaveAttendance.setOnClickListener(v -> saveAttendance());
 
         db = CampusDatabase.getDatabase(this);
 
+        loadStudents();
+    }
+
+    private void loadStudents() {
         executorService.execute(() -> {
-            if (db.studentDao().getAll().isEmpty()) {
-                db.studentDao().insert(new Student("101", "John Doe", "john.doe@example.com", "Paid"));
-                db.studentDao().insert(new Student("102", "Jane Smith", "jane.smith@example.com", "Pending"));
-            }
             List<Student> studentList = db.studentDao().getAll();
             runOnUiThread(() -> {
                 adapter = new StudentAdapter(studentList, this);
-                rvStudents.setAdapter(adapter);
+                binding.rvStudents.setAdapter(adapter);
             });
         });
     }
@@ -77,5 +77,11 @@ public class AttendanceActivity extends AppCompatActivity implements StudentAdap
                 finish();
             });
         });
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        finish();
+        return true;
     }
 }
