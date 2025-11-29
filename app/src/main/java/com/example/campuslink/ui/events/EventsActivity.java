@@ -2,7 +2,6 @@ package com.example.campuslink.ui.events;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -12,6 +11,7 @@ import com.example.campuslink.R;
 import com.example.campuslink.data.local.CampusDatabase;
 import com.example.campuslink.model.Event;
 import com.example.campuslink.ui.adapter.EventAdapter;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
 import java.util.concurrent.ExecutorService;
@@ -31,8 +31,8 @@ public class EventsActivity extends AppCompatActivity {
         RecyclerView rvEvents = findViewById(R.id.rvEvents);
         rvEvents.setLayoutManager(new LinearLayoutManager(this));
 
-        Button btnCreateEvent = findViewById(R.id.btnCreateEvent);
-        btnCreateEvent.setOnClickListener(v -> {
+        FloatingActionButton fabCreateEvent = findViewById(R.id.fabCreateEvent);
+        fabCreateEvent.setOnClickListener(v -> {
             Intent intent = new Intent(EventsActivity.this, CreateEventActivity.class);
             startActivity(intent);
         });

@@ -18,6 +18,9 @@ public interface StudentDao {
     @Query("SELECT * FROM students")
     List<Student> getAll();
 
+    @Query("SELECT * FROM students WHERE id = :userId")
+    Student getStudentById(String userId);
+
     @Query("DELETE FROM students")
     void deleteAll();
 
