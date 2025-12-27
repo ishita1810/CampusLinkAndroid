@@ -13,4 +13,7 @@ public interface AttendanceRecordDao {
 
     @Query("SELECT * FROM attendance_records WHERE date = :date")
     List<AttendanceRecord> getAttendanceByDate(String date);
+
+    @Query("DELETE FROM attendance_records")
+    void deleteAll();
 }

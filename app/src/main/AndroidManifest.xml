@@ -1,9 +1,16 @@
-<manifest package="com.example.campuslink" xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.campuslink">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
-    <application android:name=".CampusLinkApplication" android:label="Campus Link" android:allowBackup="true" android:theme="@style/Theme.CampusLink">
-        <activity android:name=".ui.auth.LoginActivity">
+    <application
+        android:name=".CampusLinkApplication"
+        android:allowBackup="true"
+        android:label="Campus Link"
+        android:theme="@style/Theme.CampusLink">
+        <activity
+            android:name=".ui.auth.LoginActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -15,5 +22,7 @@
         <activity android:name=".ui.events.EventsActivity" />
         <activity android:name=".ui.events.CreateEventActivity" />
         <activity android:name=".ui.auth.RegisterActivity" />
+        <activity android:name=".ui.admin.AdminActivity" />
+        <activity android:name=".ui.faculty.FacultyActivity" />
     </application>
 </manifest>

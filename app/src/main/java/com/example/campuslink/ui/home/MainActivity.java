@@ -2,6 +2,7 @@ package com.example.campuslink.ui.home;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,6 +15,7 @@ import com.example.campuslink.data.local.Student;
 import com.example.campuslink.model.HomeGridItem;
 import com.example.campuslink.ui.adapter.HomeGridAdapter;
 import com.example.campuslink.ui.attendance.AttendanceActivity;
+import com.example.campuslink.ui.auth.LoginActivity;
 import com.example.campuslink.ui.events.EventsActivity;
 import com.example.campuslink.ui.fees.FeesActivity;
 import com.google.firebase.auth.FirebaseAuth;
@@ -28,6 +30,7 @@ public class MainActivity extends AppCompatActivity implements HomeGridAdapter.O
 
     private final ExecutorService executorService = Executors.newSingleThreadExecutor();
     private CampusDatabase db;
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +38,10 @@ public class MainActivity extends AppCompatActivity implements HomeGridAdapter.O
         setContentView(R.layout.activity_main);
 
         db = CampusDatabase.getDatabase(this);
+        mAuth = FirebaseAuth.getInstance();
+
+        ImageButton btnLogout = findViewById(R.id.btnLogout);
+        btnLogout.setOnClickListener(v -> signOut());
 
         RecyclerView rvFrequentlyUsed = findViewById(R.id.rvFrequentlyUsed);
         rvFrequentlyUsed.setLayoutManager(new GridLayoutManager(this, 3));
@@ -53,8 +60,16 @@ public class MainActivity extends AppCompatActivity implements HomeGridAdapter.O
         loadUserName();
     }
 
+    private void signOut() {
+        mAuth.signOut();
+        Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+        finish();
+    }
+
     private void loadUserName() {
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        FirebaseUser user = mAuth.getCurrentUser();
         if (user != null) {
             String userId = user.getUid();
             executorService.execute(() -> {
@@ -66,7 +81,7 @@ public class MainActivity extends AppCompatActivity implements HomeGridAdapter.O
                     }
                 });
             });
-        } 
+        }
     }
 
     @Override

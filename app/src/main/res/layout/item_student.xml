@@ -2,7 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android.layout_height="wrap_content"
+    android:layout_height="wrap_content"
     android:padding="16dp">
 
     <TextView
@@ -10,6 +10,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Student Name"
+        android:textColor="?attr/colorOnSurface"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -20,6 +21,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Student ID"
+        android:textColor="?attr/colorOnSurfaceVariant"
         app:layout_constraintTop_toBottomOf="@+id/tvStudentName"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/tvStudentName" />
@@ -29,6 +31,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Present"
+        android:textColor="?attr/colorOnSurface"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent" />

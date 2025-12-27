@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Campus Link</string>
+    <string-array name="roles">
+        <item>Student</item>
+        <item>Faculty</item>
+        <item>Admin</item>
+    </string-array>
 </resources>

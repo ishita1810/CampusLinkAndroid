@@ -4,20 +4,35 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimary"
+    android:background="?attr/colorPrimary"
     tools:context=".ui.home.MainActivity">
 
     <TextView
         android:id="@+id/tvWelcome"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
         android:text="Welcome, User"
-        android:textColor="@color/colorSurface"
+        android:textColor="?attr/colorOnPrimary"
         android:textSize="24sp"
+        app:layout_constraintEnd_toStartOf="@+id/btnLogout"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/btnLogout"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="16dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:padding="8dp"
+        android:src="@drawable/ic_logout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="?attr/colorOnPrimary" />
 
     <EditText
         android:id="@+id/etSearch"
@@ -29,6 +44,8 @@
         android:drawablePadding="8dp"
         android:hint="Search Frequently Used"
         android:padding="12dp"
+        android:textColor="?attr/colorOnSurface"
+        android:textColorHint="?attr/colorOnSurfaceVariant"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvWelcome" />
@@ -37,6 +54,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="16dp"
+        app:cardBackgroundColor="?attr/colorSurface"
         app:cardCornerRadius="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etSearch">
@@ -51,7 +69,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
                 android:text="Frequently Used"
-                android:textColor="@color/textColor"
+                android:textColor="?attr/colorOnSurface"
                 android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
